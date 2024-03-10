@@ -4,8 +4,9 @@ COPY requirements.txt requirements.txt
 COPY AES_Encrypter.py AES_Encrypter.py
 
 RUN pip3 install -r requirements.txt
-RUN alias py=python
 
 COPY programita.py programita.py
+
+RUN echo 'alias py=python' >> ~/.bashrc
 
 CMD ["python"]
