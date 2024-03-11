@@ -2,3 +2,5 @@ venv/
 *.bat
 *.pyc
 arch*.txt
+.env
+images/

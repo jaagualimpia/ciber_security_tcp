@@ -1,6 +1,7 @@
 import socket
 
 from AES_Encrypter import AES_Encrypter
+from ReconocimientoFacial import detectFace
 
 def iniciar_servidor(host, puerto, key):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as servidor:
@@ -19,18 +20,21 @@ def iniciar_servidor(host, puerto, key):
             datos = conexion.recv(1024)
             decrypted_data = ""
 
-            with open("archivo.txt", "wb") as encrypted_file:
+            with open("archivo_encriptado.txt", "wb") as encrypted_file:
                 encrypted_file.write(datos)
-                decrypted_data = aes_encrypter.decrypt_aes_cbc(key, datos)
-           
-            with open("archivo_desencriptado.txt", "w") as decrypted_file:
-                decrypted_file.write(decrypted_data)
+
+                if detectFace():
+                    decrypted_data = aes_encrypter.decrypt_aes_cbc(key, datos)
             
-                print(f"Datos recibidos: {decrypted_data}")
+                    with open("archivo_desencriptado.txt", "w") as decrypted_file:
+                        decrypted_file.write(decrypted_data)
+                    
+                        print(f"Datos recibidos: {decrypted_data}")
+                else:
+                    print("No se logro autenticar al usuario")
 
 HOST = 'localhost'  
 PUERTO = 3032  
 key = b'\x17\xce\xa2"M,t)\x85\xf7\xc6\x99\x90N2S'
 
 iniciar_servidor(HOST, PUERTO, key)
-
