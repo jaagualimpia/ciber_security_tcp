@@ -4,3 +4,4 @@ venv/
 arch*.txt
 .env
 images/
+*.zip
