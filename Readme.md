@@ -2,7 +2,7 @@ Descargar la imagen
 ```jaagualimpiac/parcial_tcp:latest```
 
 Ejecutar la imagen
-```docker run --d -i jaagualimpiac/parcial_tcp:latest```
+```docker run -d -i jaagualimpiac/parcial_tcp:latest```
 
 Ejecutar el programa titulado recibidor.py en la maquina local.
 
